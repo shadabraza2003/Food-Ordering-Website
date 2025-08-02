@@ -1,0 +1,67 @@
+import React,{useState} from "react";
+import './TestimonialSlider.css';
+
+const testimonial =[
+
+    {
+        name:"Richard",
+        text:"All the foods that I have ordered from this website are so delicious and are so soothing",
+        image:"images/client1.jpg",
+        designation:"magna aliqua"
+    },
+    {
+        name:"Kane Peterson",
+        text:"All the foods that I have ordered from this website were so delicious  ",
+        image:"images/client2.jpg",
+        designation:"magna aliqua"
+    }
+];
+
+const TestimonialSlider = () =>{
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const handlepreclick =() =>{
+        setCurrentIndex((preindex)=>(preindex -1 + testimonial.length)% testimonial.length)
+    };
+    const handleNextClick =() => {
+        setCurrentIndex((preindex)=>(preindex +1 )% testimonial.length);
+    };
+
+    return(
+        <div className="testimonial-slider">
+            <h2>What Says Our Customer</h2>
+            <div className="testimonial-container">
+                {testimonial.map((testimonial,index) =>(
+                    <div key={index} className={'testimonial ${index === curentIndex ?"actve" :" " }'}>
+
+                        <p>{testimonial.text}</p>
+                        <h4>{testimonial.name}</h4>
+                        <h5>{testimonial.designation}</h5>
+                    </div>
+
+
+                ))};
+
+            </div>
+            <div className="testimonial-navigation">
+                {testimonial.map((testimonial,index) =>(
+                    <img key={index}
+                       src={testimonial.image}
+                       alt={testimonial.name}
+                       className={'testimonial-image ${index === curentIndex ?"active" :" "}'}
+                    
+                    />
+
+                ))};
+            </div>
+            <div className="slider-control">
+                <button onClick={handlepreclick}>&lt;</button>
+                <button onClick={handleNextClick}>&gt;</button>
+               
+
+            </div>
+        </div>
+    );
+
+
+};
+export default TestimonialSlider;
